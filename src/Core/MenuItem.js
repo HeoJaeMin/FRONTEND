@@ -6,7 +6,9 @@ export default function ManuItem({text, url}){
     const nav = useNavigate();
     return (
         <ListItem disablePadding>
-            <ListItemButton onClick={()=>{nav(url)}}>
+            <ListItemButton onClick={()=>{
+                nav(url)
+            }}>
                 <ListItemText primary={text} sx={{textAlign: "center"}}/>
             </ListItemButton>
         </ListItem>

@@ -1,7 +1,14 @@
-import TreeList, {Column, SearchPanel} from "devextreme-react/tree-list";
+import TreeList, { Column, FilterRow, SearchPanel, Sorting } from "devextreme-react/tree-list";
 
-export default function BaseTreeList({dataSource, keyExpr, parentIdExpr, columns, rootValue, refer }){
+/**
+ * 
+ * devExtreme tree-list
+ * https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxTreeList/ 
+ * @returns 
+ */
+export default function BaseTreeList({ height, dataSource, keyExpr, parentIdExpr, columns, rootValue, refer }) {
 
+    //Row 확장
     const expandRows = () => {
         const instance = refer.current.instance;
 
@@ -14,9 +21,13 @@ export default function BaseTreeList({dataSource, keyExpr, parentIdExpr, columns
         <TreeList
             dataSource={dataSource}
             showBorders={true}
+            //Id
             keyExpr={keyExpr}
+            height={height}
+            //ParentId
             parentIdExpr={parentIdExpr}
             autoExpandAll={true}
+            //Start ParentId
             rootValue={rootValue}
             ref={refer}
             allowColumnReordering={true}
@@ -27,10 +38,17 @@ export default function BaseTreeList({dataSource, keyExpr, parentIdExpr, columns
             rowAlternationEnabled={true}
             onNodesInitialized={expandRows}
         >
-            <SearchPanel visible={false}/>
+            <FilterRow visible={true} />
+            <SearchPanel visible={true} />
+            <Sorting mode={"single"} />
             {
-                columns.map(item=>{
-                    return <Column dataField={item.dataField} caption={item.caption} key={item.dataField} type={"string"}/>
+                columns.map(item => {
+                    return <Column
+                        dataField={item.dataField}
+                        caption={item.caption}
+                        key={item.dataField}
+                        cellComponent={item.cellComponent}
+                    />
                 })
             }
         </TreeList>

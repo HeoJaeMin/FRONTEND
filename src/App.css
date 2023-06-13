@@ -1,5 +1,11 @@
-.MuiPaper-root{
+.MuiToolbar-root,
+.MuiDrawer-paper
+{
   background-color: #333538!important;
   color: white!important
 }
 
+.MuiPaper-rounded
+{
+  margin: 10px
+}

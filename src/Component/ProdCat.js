@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import BaseTreeList from "./Core/BaseTreeList";
+import BaseTreeList from "../Core/BaseTreeList";
+import { Paper } from "@mui/material";
+import CellComp from "../Core/CellComp";
+import { popup } from "../Core/CoreFunc";
 
 export default function ProdCat() {
     const [dataSource, setDataSource] = useState([]);
@@ -16,7 +19,14 @@ export default function ProdCat() {
     const columns = [
         {
             dataField: "dvsNm",
-            caption: "상품 구분"
+            caption: "상품 구분",
+            cellComponent: (e)=>{
+                return (
+                    <CellComp text={e.data.value} onClick={()=>{
+                        popup("/popup/prodCat/detail?target="+e.data.data.dvsCd, 1200, 800);
+                    }}/>
+                )
+            }
         }, {
             dataField: "pareDvsNm",
             caption: "상위 상품 구분"
@@ -32,13 +42,16 @@ export default function ProdCat() {
     const parentIdExpr = "pareDvsCd";
 
     return (
-        <BaseTreeList
-            columns={columns}
-            dataSource={dataSource}
-            keyExpr={keyExpr}
-            parentIdExpr={parentIdExpr}
-            rootValue={-1}
-            refer={ref}
-        />
+        <Paper>
+            <BaseTreeList
+                columns={columns}
+                dataSource={dataSource}
+                keyExpr={keyExpr}
+                parentIdExpr={parentIdExpr}
+                rootValue={-1}
+                refer={ref}
+                height={"800px"}
+            />
+        </Paper>
     );
 }
