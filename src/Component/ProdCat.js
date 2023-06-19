@@ -43,6 +43,7 @@ export default function ProdCat() {
 
     return (
         <Paper>
+            <h3>종류별 상품</h3>
             <BaseTreeList
                 columns={columns}
                 dataSource={dataSource}

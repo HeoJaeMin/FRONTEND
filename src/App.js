@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import MenuItem from "./Core/MenuItem"
 import ProdCat from './Component/ProdCat';
 import ProdCatDtl from './Component/ProdCatDtl';
+import Brand from './Component/Brand';
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/prodCat" element={<ProdCat />} />
+              <Route path="/brand" element={<Brand/>}/>
               <Route path="*" element={<div>NotFound</div>} />
             </Routes>
           </Box>
