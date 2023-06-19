@@ -4,7 +4,6 @@ import { Grid, MenuItem, Paper, Select } from "@mui/material";
 
 export default function Brand() {
     const [data, setData] = useState([]);
-    const [top, setTop] = useState([]);
     const [brand, setBrand] = useState("");
     const [brandData, setBrandData] = useState([]);
 
@@ -23,12 +22,6 @@ export default function Brand() {
         }
     }, [brand])
 
-    useEffect(()=>{
-        fetch("http://localhost:8080/brand/top?limit=3")
-        .then((res)=>res.json())
-        .then(res=>setTop(res));
-    }, [])
-
     function onChange(e) {
         setBrand(e.target.value)
     }
@@ -46,17 +39,6 @@ export default function Brand() {
         }, {
             dataField: "sellCnt",
             caption: "판매 수량"
-        }
-    ]
-
-    const topColumns = [
-        {
-            dataField: "brandNm",
-            caption: "브랜드"
-        },
-        {
-            dataField: "totSell",
-            caption: "전체 판매수량"
         }
     ]
     return (
@@ -82,13 +64,7 @@ export default function Brand() {
                 </Grid>
             </Paper>
             <Paper>
-                <BaseDataGrid data={data} height={350} columns={columns} />
-            </Paper>
-            <Paper style={{ boxShadow: "none" }}>
-                <h3>브랜드 Top3</h3>
-            </Paper>
-            <Paper>
-                <BaseDataGrid data={top} height={320} columns={topColumns} />
+                <BaseDataGrid data={data} height={650} columns={columns} />
             </Paper>
         </>
 
